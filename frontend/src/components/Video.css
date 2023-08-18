@@ -1,0 +1,10 @@
+.cardVideo{
+width: 356px;
+height:348px;
+background-color: black;
+margin: 30px;
+border-radius: 16px;
+border: 40px;
+border-color: darkgrey;
+color: white;
+}

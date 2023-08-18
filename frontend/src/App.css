@@ -1,0 +1,14 @@
+.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.videos-div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  }
+.text-div{
+  display: flex;
+  flex-direction: column;
+}

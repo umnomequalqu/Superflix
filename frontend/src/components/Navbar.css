@@ -1,0 +1,19 @@
+.dark{
+    background-color:black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items:  center;
+    padding-left: 20px;
+}
+.white{
+    color: white;
+    font-size: 18px;
+}
+.link{
+    margin-right: 20px;
+}
