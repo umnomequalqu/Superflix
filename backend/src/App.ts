@@ -2,6 +2,10 @@ import express,{Response,Request}  from "express";
 import { json } from "body-parser";
 const app = express()
 app.use(json())
+import cors from 'cors';
+app.use(cors())
+import VideoRouter from "./routes/VideoRoutes"
+app.use("/videos", VideoRouter)
 
 app.get("/oi",(req: Request,res: Response)=>{
     res.send("bem vindo")
@@ -17,3 +21,7 @@ app.get("/saymyname",(req: Request,res: Response)=>{
 app.listen(3001,()=>{
     console.log("api rodando")
 })
+
+
+import { connect } from "./database/config";
+connect()

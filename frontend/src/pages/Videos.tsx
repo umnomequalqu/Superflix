@@ -1,27 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { videoProps } from '../components/Video';
 import { useState } from 'react';
 import Video from '../components/Video';
-
+import { getVideosData } from '../hooks/getVideosData';
 function Videos() {
-    const [videos,setvideos] = useState<videoProps[]>([
+    const [videos,setvideos] = useState<videoProps[]>([])
     
-        {
-          id: '123-3123-12',
-          name: "COMO CURAR (RÁPIDO) SUA PROCRASTINAÇÃO",
-          url: "https://www.youtube.com/embed/faE1EGQJ0lQ",
-        }, 
-        {
-          id: '123-3123-12',
-          name: "COMO CURAR (RÁPIDO) SUA PROCRASTINAÇÃO",
-          url: "https://www.youtube.com/embed/faE1EGQJ0lQ",
-        },  
-        {
-          id: '123-3123-12',
-          name: "COMO CURAR (RÁPIDO) SUA PROCRASTINAÇÃO",
-          url: "https://www.youtube.com/embed/faE1EGQJ0lQ",
-        }   
-      ])
+  useEffect(()=>{
+    getVideosData()
+     .then((res:videoProps[])=>setvideos(res))
+     .catch((err:any)=>console.log(err))
+  })
     
       return (
         <div className="App">
