@@ -24,4 +24,15 @@ export class VideoController{
             return res.status(404).json({message: "Erro do servidor tente novamente em breve"})
         }
     }
+    static async deleteVideo(req:Request, res:Response){
+        try {
+            const video = await Video.findByIdAndRemove(req.params.id);
+            if(!video){
+                return res.status(404).json({message: "Vídeo não encontrado"})
+            }
+            return res.status(201).json({message: "Vídeo deletado com sucesso"})
+        } catch (error) {
+            res.status(500).json({message: "Erro ao deletar o vídeo"})
+        }
+    }
 }
