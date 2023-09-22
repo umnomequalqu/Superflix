@@ -28,7 +28,10 @@ function Videos() {
         <div className="App">
           <div className='text-div'>
             <h1>Videos inscritos</h1>
-            <AddNewButton abrirModal={mudarModal}/>
+            <AddNewButton abrirModal={mudarModal}
+            {
+              showModal ? <Modal fecharModal={mudarModal}/> : null
+            }/>
               </div>
           <div className='videos-div'></div>
           {
