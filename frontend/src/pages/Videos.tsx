@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { videoProps } from '../interfaces/videoProps';
-import { useState } from 'react';
 import Video from '../components/Video';
 import { getVideosData } from '../hooks/getVideosData';
 import { DELETED_VIDEO } from '../types/deleteVideoTypes';
-import { AddNewButton } from '../UI/AddNewButton';
+import { AddNewButton } from '../components/Botao';
+import axios from 'axios';
+
 function Videos() {
     const [videos,setvideos] = useState<videoProps[]>([])
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState<boolean>(false)
 
     const mudarModal = ()=>{
       setShowModal((state)=>!state)
@@ -18,12 +19,30 @@ function Videos() {
      .catch((err:any)=>console.log(err))
   },[])
 
+  const createVideo = (name: string, description: string, url: string ) =>{
+    axios.post<{ video: videoProps}>(`http://localhost:3000/videos/createVideo`, {name, description, url})
+    .then((res) => {
+      setvideos([...videos, res.data.video])
+    })
+    .catch((err) => console.log("Erro ao cadastrar video", err));
+  }
+
+
   const deleteVideoWithSuccess =(resHook: string, id: string)=>{
     if (resHook == DELETED_VIDEO){
       setvideos(videos.filter(v => v._id !== id))
     }
   } 
-    
+
+  const editVideo = (_id: string, name: string, description: string, url: string) => {
+    axios.put<{ video: videoProps }>(`http://localhost:3000/videos/editVideo/${_id}`, {_id, name, description, url})
+    .then((res) => {
+      const newUpdateVideos = videos.map((v) => (v._id === _id ? res.data.video : v));
+      setvideos(newUpdateVideos)
+    })
+    .catch((err) => console.log("Erro ao pegar os dados da api", err));
+  }
+
       return (
         <div className="App">
           <div className='text-div'>

@@ -1,13 +1,17 @@
 import React, {useState} from "react"
-import "./AddNewButton.css"
+import "./Button.css"
 
-export function AddNewButton(abrirModal){
+interface AddNewButtonProps{
+    abrirOModal: () => void;
+    showModal?: boolean;
+}
+export function AddNewButton(props: AddNewButtonProps){
     const [mouse, setMouse] = useState(true)
     return(
         <div 
         onMouseLeave={()=>setMouse(true)}
         onMouseEnter={()=>setMouse(false)}
-        onClick={()=>abrirModal()}
+        onClick={() => props.abrirOModal()}
         className={`${mouse ? "addNewButton" : "addNewButton-mouse"}`}>
             {mouse ? "+" : "Adicionar um vídeo"}
         </div>
